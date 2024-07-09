@@ -90,7 +90,7 @@ const TransactionForm: React.FC = () => {
 							<FormField
 								control={form.control}
 								name="account_number"
-								render={({ field }) => (
+								render={() => (
 									<FormItem>
 										<FormLabel>Account Number</FormLabel>
 										<FormControl>
@@ -134,7 +134,7 @@ const TransactionForm: React.FC = () => {
 							<FormField
 								control={form.control}
 								name="signature"
-								render={({ field }) => (
+								render={() => (
 									<FormItem className="flex-1">
 										<FormLabel>Signature Pad</FormLabel>
 										<FormControl>
