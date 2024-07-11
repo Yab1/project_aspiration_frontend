@@ -9,10 +9,17 @@ import { Button } from "../ui/button";
 
 type CanvasProps = {
 	id: string;
+	canvasWidth?: number;
+	canvasHeight?: number;
 	onImageDataChange: (id: string, imageData: ImageDataType) => void;
 };
 
-export default function Canvas({ id, onImageDataChange }: CanvasProps) {
+export default function Canvas({
+	id,
+	onImageDataChange,
+	canvasWidth = 500,
+	canvasHeight = 300,
+}: CanvasProps) {
 	const {
 		imageData,
 		drawingMode,
@@ -60,15 +67,17 @@ export default function Canvas({ id, onImageDataChange }: CanvasProps) {
 				<SignatureCanvas
 					ref={canvasRef}
 					canvasProps={{
-						width: 500,
-						height: 300,
+						width: canvasWidth,
+						height: canvasHeight,
 						className: "signature-pad",
 					}}
 					penColor="blue"
 					onEnd={() => handleCanvasChange(id)}
 				/>
 			) : (
-				<div className="w-[500px] h-[300px] signature-pad flex justify-center items-center">
+				<div
+					className={`w-[${canvasWidth}px] h-[${canvasHeight}px] signature-pad flex justify-center items-center`}
+				>
 					<img src={imageData.blobURL ? imageData.blobURL : ""} />
 				</div>
 			)}
