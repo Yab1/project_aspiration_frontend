@@ -1,26 +1,15 @@
 "use client";
 
-import { FeedbackType } from "@/components/feedback/Feedbacks";
 import { Canvas } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { ImageDataType } from "@/types";
 import { axiosInstance } from "@/utils";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
+import Link from "next/link";
 import { useState } from "react";
 
 export default function StructuralSimilarity() {
 	const [canvasImages, setCanvasImages] = useState<ImageDataType[]>([]);
-	const { data } = useQuery({
-		queryKey: ["feedback"],
-		queryFn: async () => {
-			try {
-				const response = await axiosInstance.get("feedbacks/");
-				return response.data.data as FeedbackType[];
-			} catch (error) {
-				throw new Error(`Error fetching feedbacks: ${error}`);
-			}
-		},
-	});
 
 	const mutation = useMutation({
 		mutationKey: ["check_similarity"],
@@ -59,7 +48,9 @@ export default function StructuralSimilarity() {
 				<h2 className="font-medium">
 					Identify similarity between two pictures in %
 				</h2>
-				<Button>Feedback Form</Button>
+				<Link href="/">
+					<Button>Feedback Form</Button>
+				</Link>
 			</nav>
 			<section className="flex items-center justify-between flex-1">
 				<Canvas id="left_canvas" onImageDataChange={handleImageDataChange} />
