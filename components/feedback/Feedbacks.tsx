@@ -42,7 +42,7 @@ export default function Feedbacks() {
 					helping us improve and serve you better.
 				</CardDescription>
 			</CardHeader>
-			<CardContent className="space-y-3">
+			<CardContent className="space-y-3 max-h-[368px] overflow-y-auto">
 				{data?.map(({ author: { full_name }, comment }, index) => (
 					<div
 						key={index}
