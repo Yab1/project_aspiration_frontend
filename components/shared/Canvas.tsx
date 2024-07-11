@@ -33,7 +33,7 @@ export default function Canvas({
 
 	useEffect(() => {
 		onImageDataChange(id, imageData);
-	}, [imageData]);
+	}, [id, imageData]);
 
 	return (
 		<div className="relative bg-white rounded-md">

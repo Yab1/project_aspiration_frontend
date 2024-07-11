@@ -40,14 +40,13 @@ export type FeedbackType = {
 
 export default function FeedbackForm() {
 	const { toast } = useToast();
-	const { mutate, data } = useMutation({
+	const { mutate } = useMutation({
 		mutationFn: async (newFeedback: FeedbackType) => {
 			try {
 				const response = await axiosInstance.post("feedbacks/create/", newFeedback);
 				toast({
 					description: response.data.data.message,
 				});
-				return response.data.data;
 			} catch (error: unknown) {
 				const axiosError = error as AxiosError;
 				const errorMessage =
@@ -57,8 +56,6 @@ export default function FeedbackForm() {
 					variant: "destructive",
 					description: errorMessage,
 				});
-
-				throw new Error(`Error fetching feedbacks: ${error}`);
 			}
 		},
 	});
@@ -74,6 +71,7 @@ export default function FeedbackForm() {
 	}
 
 	const handleImageDataChange = (id: string, imageData: ImageDataType) => {
+		console.log(id);
 		form.setValue("signature", imageData.base64String);
 	};
 
